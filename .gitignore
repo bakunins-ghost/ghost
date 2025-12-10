@@ -31,6 +31,7 @@ local/
 # Executables for the Go service (your compiled application name)
 # Replace 'go-proxy-test-service' with the actual binary name if it changes
 go-proxy-test-service
+.shell-pre-oh-my-zsh
 
 # Test files and coverage
 *.test
