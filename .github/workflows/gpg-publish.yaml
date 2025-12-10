@@ -22,9 +22,9 @@ jobs:
 
     - name: Deploy Public Key to VPS
       run: |
-        # Replace 'root@82.29.197.239' with your actual user/IP
-        REMOTE_HOST="root@82.29.197.239"
-        REMOTE_PATH="/path/to/gpg/root/.well-known/openpgpkey/hu/"
+        # Replace 'ghost@82.29.197.239' with your actual user/IP
+        REMOTE_HOST="ghost@82.29.197.239"
+        REMOTE_PATH="/home/ghost/.gnupg/private-keys-v1.d/C91FB17EF5ACA74B43AEE683B657BF2E4FDDC52E.key/.well-known/openpgpkey/hu/"
 
         # Ensure the remote directory exists
         ssh $REMOTE_HOST "mkdir -p $REMOTE_PATH"
