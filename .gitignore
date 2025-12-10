@@ -1,0 +1,80 @@
+# --------------------------------------------------------------------------
+# 1. GO LANGUAGE ARTIFACTS
+# --------------------------------------------------------------------------
+# Binaries for current and cross-compilation builds
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+*.local
+local/
+.local/
+.cache/
+.ssh
+.vscode-server
+.zshrc
+.wget-hsts
+.zcompdump-srv1182700-5.9
+.zcompdump-srv1182700-5.9.zwc
+.zsh_history
+.zshrc
+.bash_profile
+.bash_logout
+.bash_history
+.bashrc
+.config
+.gnupg
+.gitconfig
+.oh-my-zsh
+# Executables for the Go service (your compiled application name)
+# Replace 'go-proxy-test-service' with the actual binary name if it changes
+go-proxy-test-service
+
+# Test files and coverage
+*.test
+*.out
+
+# Dependency management and caching
+vendor/
+go.sum
+
+# Go build cache
+.cache/go-build/
+
+# IDE files (e.g., VS Code or GoLand)
+.idea/
+.vscode/
+
+# --------------------------------------------------------------------------
+# 2. OPERATIONAL SECRETS & KEYS (CRITICAL OPSEC)
+# --------------------------------------------------------------------------
+# Never commit private keys, passwords, or encrypted artifacts!
+# Your GPG master key backup and revocation certificate
+master-secret-key.asc
+revoke.asc
+
+# Any backup of the Systemd Service file
+*.service.bak
+
+# Log files
+log.txt
+*.log
+
+# --------------------------------------------------------------------------
+# 3. SYSTEMD / DEPLOYMENT (If you store these locally before deploying)
+# --------------------------------------------------------------------------
+# Systemd files are sensitive as they contain server-specific paths
+go-proxy-test.service
+
+# --------------------------------------------------------------------------
+# 4. ENVIRONMENT & TEMPORARY FILES
+# --------------------------------------------------------------------------
+# Environment variables file used for local running
+.env
+.env.local
+
+# Vim/Nano temporary/swap files
+*~
+#
