@@ -32,7 +32,7 @@ local/
 # Replace 'go-proxy-test-service' with the actual binary name if it changes
 go-proxy-test-service
 .shell-pre-oh-my-zsh
-
+.shell.pre-oh-my-zsh
 # Test files and coverage
 *.test
 *.out
