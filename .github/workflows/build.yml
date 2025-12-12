@@ -1,4 +1,6 @@
 name: Build and Deploy Manager
+
+# Triggers the workflow manually and automatically on pushes to the main branch.
 on:
   push:
     branches: [ main ]
@@ -17,19 +19,23 @@ jobs:
       with:
         go-version: '1.22' 
 
+    # --- Step 1: Synchronize Dependencies ---
     - name: Get Go Dependencies
+      # This step should run from the root, where go.mod/go.sum are now located.
+      # Running 'go mod tidy' locally before committing is best, but this helps.
       run: go mod download
-      # 💥 NEW SIMPLIFIED PATH 💥
-      working-directory: ./app
+      working-directory: ./  # The repository root (simplest path)
 
+    # --- Step 2: Build the Application ---
     - name: Build Go Binary (system-mgr)
+      # Compiles the executable from the root.
       run: go build -o system-mgr .
-      # 💥 NEW SIMPLIFIED PATH 💥
-      working-directory: ./app
-
+      working-directory: ./  # The repository root
+      
+    # --- Step 3: Upload the Artifact for Deployment ---
     - name: Upload Binary Artifact
       uses: actions/upload-artifact@v4
       with:
         name: system-mgr-binary
-        # Use the correct new location for the artifact upload
-        path: ./app/system-mgr
+        # The path points to the binary created directly in the root
+        path: ./system-mgr
