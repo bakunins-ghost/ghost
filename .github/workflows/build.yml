@@ -30,7 +30,7 @@ jobs:
     - name: Build Go Binary (system-mgr)
       # Compiles the executable from the root.
       run: go build -o system-mgr .
-      working-directory: /app/go/src  # The repository root
+      working-directory: /app/go/src/opsec-service # The repository root
       
     # --- Step 3: Upload the Artifact for Deployment ---
     - name: Upload Binary Artifact
