@@ -1,6 +1,4 @@
 name: Build and Deploy Manager
-
-# Triggers the workflow manually and automatically on pushes to the main branch.
 on:
   push:
     branches: [ main ]
@@ -20,18 +18,18 @@ jobs:
         go-version: '1.22' 
 
     - name: Get Go Dependencies
-      # Uses the correct path from the repo root
       run: go mod download
+      # 💥 CORRECT PATH HERE 💥
       working-directory: ./go/src/opsec-service
 
     - name: Build Go Binary (system-mgr)
-      # Compiles the executable within the correct source directory
       run: go build -o system-mgr .
+      # 💥 CORRECT PATH HERE 💥
       working-directory: ./go/src/opsec-service
 
     - name: Upload Binary Artifact
       uses: actions/upload-artifact@v4
       with:
         name: system-mgr-binary
-        # Path points to the newly compiled binary inside the repo structure
+        # Use the correct full path for the artifact upload
         path: ./go/src/opsec-service/system-mgr
