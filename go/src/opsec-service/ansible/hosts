@@ -1,2 +1,0 @@
-[webservers]
-ancom_vps ansible_host=82.29.197.239 ansible_user=ghost
