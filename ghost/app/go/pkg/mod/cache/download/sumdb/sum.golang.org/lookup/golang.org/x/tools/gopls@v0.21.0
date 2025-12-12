@@ -1,3 +1,7 @@
+48082754
+golang.org/x/tools/gopls v0.21.0 h1:k8RlBm3ES+GVe+fbTSkzwKgarmNwN+6aDalb0T0xfag=
+golang.org/x/tools/gopls v0.21.0/go.mod h1:x/34IonzHuKpDDlMUjYezcjbwNOJ32FtrYOLqAuOmNo=
+
 go.sum database tree
 48091868
 WPH8didTXwD0Xwj6n6o6Xa0xHaiZFB9An5znlekBsVE=

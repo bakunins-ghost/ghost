@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ⓐncom.Space</title>
+    <style>
+        /* --- GLOBAL BODY STYLES (90s Terminal Aesthetic) --- */
+        body {
+            background-color: #0d0d0d;
+            /* Very dark background (near black) */
+            color: #00ff00;
+            /* Bright green text for security/terminal aesthetic */
+            font-family: 'Courier New', Courier, monospace;
+
+            justify-content: center;
+            /* Center content vertically */
+            flex-direction: column;
+            align-items: center;
+            /* Center content horizontally */
+            height: 100vh;
+            /* Ensures body fills the entire viewport height */
+            min-height: 100vh;
+            /* IMPORTANT for Flexbox to handle taller content */
+            margin: 0;
+            /* Removes default browser margins/padding */
+        }
+
+        /* The MAIN element wraps the content to allow scrolling if needed */
+        main {
+            /* If content is too tall, this allows the main container to scroll */
+            overflow-y: auto;
+            /* Ensures centering still works even if content overflows */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            /* Ensures it takes up all available vertical space */
+            width: 100%;
+        }
+
+        /* --- CONTAINER STYLES --- */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            /* Adding padding to prevent content hugging the scroll edge */
+            padding: 30px 0;
+        }
+
+        .gpg-container,
+        .message-container,
+        .video-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #00ff00;
+            /* Subtle green border */
+            box-shadow: 0 0 10px #00ff00;
+            /* Neon glow effect */
+            width: 60%;
+        }
+
+        .video-container {
+            position: relative;
+            width: 60%;
+            height: auto;
+            overflow: hidden;
+            font-size: 1.33em;
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* --- STATIC OVERLAY (GLITCH EFFECT) --- */
+        .static-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: repeating-conic-gradient(#000 0 0.0001%, #0000 0 0.0002%);
+            background-size: 3000px 3000px;
+            background-position: 60% 60%;
+            opacity: 0.7;
+            pointer-events: none;
+            animation: tv-static 0.8s linear infinite;
+            z-index: 10;
+        }
+
+        @keyframes tv-static {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 100% 100%;
+            }
+        }
+
+        .message {
+            font-size: 2em;
+            font-weight: bold;
+            letter-spacing: 3px;
+            animation: flicker 1.5s infinite alternate;
+        }
+
+        .lol_this_video {
+            border: 2px solid #00ff00;
+            box-shadow: 0 0 15px #00ff00;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+
+        @keyframes flicker {
+
+            0%,
+            18%,
+            22%,
+            25%,
+            53%,
+            57%,
+            100% {
+                opacity: 1;
+                text-shadow: 0 0 4px #00ff00;
+            }
+
+            20%,
+            24%,
+            55% {
+                opacity: 0.8;
+                text-shadow: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <section class="container">
+            <div class="message-container">
+                <div class="message">
+                    ANCOM.SPACE <br> // THE GHOST IS IN THE MACHINE //
+                </div>
+
+
+            </div>
+            <div class="video-container">
+                <video controls autoplay muted loop width="600" height="400" class="lol_this_video">
+                    <source
+                        src=" https://res.cloudinary.com/dbcgiwnlc/video/upload/v1765572907/the_marxists_the_anarchists_lockjf.mp4"
+                        type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="static-overlay" aria-hidden="true"></div>
+                <div style="margin-top: 10px; font-size: 0.9em;">The Marxists, the anarchists, and the information they
+                    deliberately failed to mention. We have reciepts.
+                    <a style="color: #FF00FF" href="mailto:emmet_goldman@ancom.space">Contact us</a> with a verifiable
+                    gpg-key
+                </div>
+
+            </div>
+            <div class="gpg-container" style="margin-top: 5px; font-size: 0.8em; color: #CCCCCC;">
+                <a href="public-key.txt" style="color: #90EE90; text-decoration: none;">Download PGP Public Key</a>
+                <br>
+                <span style="color: #FF69B4;">CRITICAL: Verify the Full Fingerprint Out-of-Band (OOB):</span>
+                <br>
+                Fingerprint: pub ed25519 2025-12-10 [SC] [expires: 2026-12-10]
+                9769 2DAB 776A 6857 9163 4DE4 9AE4 677E 6284 B368
+                uid [ultimate] Emmet Goldman (It's me, what's up?) <emmet_goldman@ancom.space>
+                    sub cv25519 2025-12-10 [E] [expires: 2026-12-10]
+
+                    pub rsa4096 2025-12-12 [SC] [expires: 2026-12-12]
+                    BCB4 9C2C EDA4 38FE 93AF C4D0 0666 6D90 039E A3A4
+                    uid [ultimate] Ghost <emmet_goldman@ancom.space>
+                        sub rsa4096 2025-12-12 [E] [expires: 2026-12-12]
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
