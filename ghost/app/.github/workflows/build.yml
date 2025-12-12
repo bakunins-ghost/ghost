@@ -21,16 +21,15 @@ jobs:
 
     # --- Step 1: Synchronize Dependencies ---
     - name: Get Go Dependencies
-      # This step should run from the root, where go.mod/go.sum are now located.
-      # Running 'go mod tidy' locally before committing is best, but this helps.
+      # The directory containing the go.mod file is the repository root (./)
       run: go mod download
-      working-directory: /home/ghost/src/opsec-service/go.mod  # The repository root (simplest path)
+      working-directory: ./  # <-- CORRECTED: Must be a relative directory
 
     # --- Step 2: Build the Application ---
     - name: Build Go Binary (system-mgr)
       # Compiles the executable from the root.
       run: go build -o system-mgr .
-      working-directory: /home/ghost/src/opsec-service # The repository root
+      working-directory: ./  # <-- CORRECTED: Must be a relative directory
       
     # --- Step 3: Upload the Artifact for Deployment ---
     - name: Upload Binary Artifact
