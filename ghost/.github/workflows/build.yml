@@ -29,7 +29,7 @@ jobs:
     - name: Build Go Binary (system-mgr)
       run: go build -o system-mgr .
       working-directory: ./app  # CORRECTED: Relative path to the app module
-      
+      # fdsfjk
     # --- Step 3: Upload the Artifact for Deployment ---
     - name: Upload Binary Artifact
       uses: actions/upload-artifact@v4
