@@ -1,0 +1,37 @@
+name: Build and Deploy Manager
+
+# Triggers the workflow manually and automatically on pushes to the main branch.
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Set up Go 1.22
+      uses: actions/setup-go@v5
+      with:
+        go-version: '1.22' 
+
+    - name: Get Go Dependencies
+      # Uses the correct path from the repo root
+      run: go mod download
+      working-directory: ./go/src/opsec-service
+
+    - name: Build Go Binary (system-mgr)
+      # Compiles the executable within the correct source directory
+      run: go build -o system-mgr .
+      working-directory: ./go/src/opsec-service
+
+    - name: Upload Binary Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: system-mgr-binary
+        # Path points to the newly compiled binary inside the repo structure
+        path: ./go/src/opsec-service/system-mgr
