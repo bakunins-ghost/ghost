@@ -24,7 +24,7 @@ jobs:
       # This step should run from the root, where go.mod/go.sum are now located.
       # Running 'go mod tidy' locally before committing is best, but this helps.
       run: go mod download
-      working-directory: /app/go/src  # The repository root (simplest path)
+      working-directory: /app/go/src/app/opsec-service/go.mod  # The repository root (simplest path)
 
     # --- Step 2: Build the Application ---
     - name: Build Go Binary (system-mgr)
