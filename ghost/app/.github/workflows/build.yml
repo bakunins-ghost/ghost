@@ -23,13 +23,13 @@ jobs:
     - name: Get Go Dependencies
       # The directory containing the go.mod file is the repository root (./)
       run: go mod download
-      working-directory: ./  # <-- CORRECTED: Must be a relative directory
+      working-directory: ./  # <-- CORRECTED: Must be the relative root directory
 
     # --- Step 2: Build the Application ---
     - name: Build Go Binary (system-mgr)
       # Compiles the executable from the root.
       run: go build -o system-mgr .
-      working-directory: ./  # <-- CORRECTED: Must be a relative directory
+      working-directory: ./  # <-- CORRECTED: Must be the relative root directory
       
     # --- Step 3: Upload the Artifact for Deployment ---
     - name: Upload Binary Artifact
