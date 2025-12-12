@@ -1,0 +1,65 @@
+name: Ansible Deployment to VPS
+
+on:
+  # Triggers this workflow immediately after the "Build and Deploy Manager" workflow finishes successfully
+  workflow_run:
+    workflows: ["Build and Deploy Manager"]
+    types: [completed]
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # Only run deployment if the build step succeeded
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+      
+    - name: Download Binary Artifact
+      uses: actions/github-script@v7
+      with:
+        script: |
+          // --- Custom script to download artifact from the completed workflow run ---
+          const { data: { artifacts } } = await github.rest.actions.listWorkflowRunArtifacts({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            run_id: context.payload.workflow_run.id,
+          });
+          const match = artifacts.find(artifact => artifact.name === 'system-mgr-binary');
+          if (!match) {
+              core.setFailed('Deployment failed: Could not find the system-mgr-binary artifact.');
+              return;
+          }
+          const download = await github.rest.actions.downloadArtifact({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            artifact_id: match.id,
+            archive_format: 'zip',
+          });
+          // Save the zip and unzip the binary (adjust for the zip contents structure)
+          const fs = require('fs');
+          const AdmZip = require('adm-zip');
+          const zip = new AdmZip(Buffer.from(download.data));
+          zip.extractAllTo(process.env.GITHUB_WORKSPACE + '/opsec-service', true);
+
+    - name: Install Ansible and dependencies
+      run: |
+        sudo apt-get update && sudo apt-get install -y python3-pip
+        pip install ansible
+        pip install paramiko # Ansible dependency for SSH
+
+    - name: Setup Ansible SSH Key (Critical OpSec)
+      uses: webfactory/ssh-agent@v0.9.0
+      with:
+        # Inject the PRIVATE key saved as a GitHub Secret
+        ssh-private-key: ${{ secrets.DEPLOYMENT_SSH_KEY }}
+        # Passphrase needs separate handling if set, skip for now.
+
+    - name: Run Ansible Deployment Playbook
+      run: ansible-playbook ansible/deploy.yml -i ansible/hosts
+      working-directory: ./opsec-service
+      env:
+        # Tells Ansible not to ask for fingerprint confirmation for the host.
+        ANSIBLE_HOST_KEY_CHECKING: 'False'

@@ -79,3 +79,8 @@ go-proxy-test.service
 # Vim/Nano temporary/swap files
 *~
 #
+.dotnet
+.dotnet.*
+.dotnet/*
+.dotnet
+.dotnet/corefx/cryptography/crls
