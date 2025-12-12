@@ -84,3 +84,5 @@ go-proxy-test.service
 .dotnet/*
 .dotnet
 .dotnet/corefx/cryptography/crls
+lynis-report.dat
+ancom.space.gpg.pub
