@@ -88,3 +88,5 @@ lynis-report.dat
 ancom.space.gpg.pub
 lynis.*
 lynix-.*.*
+.shell.pre-oh-my-zsh
+.oh-my-zsh/
