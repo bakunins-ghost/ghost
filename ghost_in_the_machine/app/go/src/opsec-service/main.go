@@ -109,7 +109,6 @@ func sendEmail(toAddress, subject, body string) error {
     // 2. Setup TLS Configuration (The Fix)
     tlsConfig := &tls.Config{
         ServerName: smtpHost, 
-        InsecureSkipVerify: true, 
     }
 
     // 3. Establish TLS Connection

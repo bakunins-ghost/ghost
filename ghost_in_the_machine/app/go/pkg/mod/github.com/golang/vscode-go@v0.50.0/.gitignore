@@ -5,3 +5,25 @@ node_modules/
 .vscode-test/
 .DS_Store
 .user-data-dir-test/
+# IDE/OS Artifacts
+.DS_Store
+*.swp
+.idea/
+
+# Go build/cache files
+*.exe
+*.test
+*.out
+/vendor/
+/go/pkg/
+
+# Project Logs and Cache (OPSEC CRITICAL)
+*.log
+lynis.log
+lynis-report.dat
+*.dat
+
+# Environment/Secrets (OPSEC CRITICAL)
+.env
+# Note: DO NOT IGNORE the public key itself (public-key.txt) 
+# as it is meant to be public, but keep it out of the Nginx root via deployment
